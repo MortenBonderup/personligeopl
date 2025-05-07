@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import imgPlaceholder from "../assets/img/img-placeholder.jpg";
 import styles from "../views/styles.module.css";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../firebase'; 
 
 export default function PostForm({ savePost, post }) {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const [imageFile, setImageFile] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-    const email = sessionStorage.getItem("email");
-
+    const [user, loading, error] = useAuthState(auth); // Henter aktuelle brugers oplysninger
+    
     useEffect(() => {
         if (post) {
             // if post, set the states with values from the post object.
@@ -19,6 +21,8 @@ export default function PostForm({ savePost, post }) {
         }
     }, [post]); // useEffect is called every time post changes.
 
+    // Finder frem til den bruger som er logget på    
+    
     function handleSubmit(event) {
         event.preventDefault();
         const formData = {
@@ -26,7 +30,7 @@ export default function PostForm({ savePost, post }) {
             title: title,
             image: imageFile,
             body: body,
-            email: email // Jeg gemmer email med de øvrige information. Så kan jeg filtrere på den.
+            email: user.email // Jeg gemmer email med de øvrige informationer. Så kan jeg filtrere på den.
         };
 
         const validForm = formData.title && formData.body && formData.image; // will return false if one of the properties doesn't have a value
@@ -38,6 +42,9 @@ export default function PostForm({ savePost, post }) {
             setErrorMessage("Please, fill in all fields.");
         }
     }
+
+    if (loading) {return <div>Indlæser...</div>;}
+    if (error) {return <div>Fejl: {error.message}</div>;}
 
     return (
         <form onSubmit={handleSubmit}>

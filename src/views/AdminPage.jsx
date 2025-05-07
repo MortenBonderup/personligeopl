@@ -3,11 +3,13 @@ import PostCard from "../components/PostCard";
 import { firebaseUrl } from "../firebase";
 import SubNav from "../components/SubNav";
 import styles from "./styles.module.css";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase";
 
 export default function HomePage() {
     const [posts, setPosts] = useState([]);
-    const email = sessionStorage.getItem("email");
-
+    const [user, loading, error] = useAuthState(auth); // Henter aktuelle brugers oplysninger
+ 
     useEffect(() => {
         async function getPosts() {
             const url = `${firebaseUrl}/posts.json`;
@@ -16,11 +18,14 @@ export default function HomePage() {
             const postsArray = Object.keys(data).map(key => ({ id: key, ...data[key] })); // from object to array
             
             // Filtrer posts baseret på den aktuelle brugers email
-            const personligePosts = postsArray.filter(post => post.email === email);
+            const personligePosts = postsArray.filter(post => post.email === user.email);
             setPosts(personligePosts);
         }
         getPosts();
-    }, [email]);
+    }, [user]);
+
+    if (loading) {return <div>Indlæser...</div>;}
+    if (error) {return <div>Fejl: {error.message}</div>;}
 
     return (
         <>
