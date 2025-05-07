@@ -1,0 +1,136 @@
+:root {
+  --green: rgb(38, 76, 89);
+  --light-green: rgb(172, 198, 201);
+  --light-grey: #f1f1f4;
+  --text-color-light: #f1f1f1;
+  --text-color-dark: #333;
+  --text-color-danger: rgb(152, 58, 58);
+  --white: #f1f1f1;
+}
+
+body {
+  color: var(--text-color-dark);
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.logon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 650px;
+}
+
+.logon-form {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 320px;
+  text-align: center;
+}
+
+.logon-form h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.logon-form label {
+  display: block;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.logon-form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.logon-form button {
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.logon-form button:hover {
+  background: #0056b3;
+}
+
+
+/* ------------- NAVIGATION ----------- */
+/* Navigation Bar */
+nav {
+  background-color: #2c3e50; /* Dark navy blue */
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+/* Navigation Links */
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  font-size: 18px;
+  font-weight: bold;
+  transition: 0.3s ease-in-out;
+}
+
+nav a:hover {
+  background-color: #34495e; /* Lighter shade on hover */
+  border-radius: 5px;
+}
+
+/* Mobile-Friendly Navigation */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  nav a {
+    display: block;
+    text-align: center;
+    margin: 5px 0;
+  }
+}
+
+
+/* ---------- USERPAGE ----------- */
+
+.destinations-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 40px;
+  margin-top: 150px;
+}
+
+.destination-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 250px;
+}
+
+.destination-image {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
